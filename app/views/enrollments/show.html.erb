@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Registry:</strong>
+  <%= @enrollment.registry %>
+</p>
+
+<p>
+  <strong>Coordinator:</strong>
+  <%= @enrollment.coordinator %>
+</p>
+
+<p>
+  <strong>Participant:</strong>
+  <%= @enrollment.participant %>
+</p>
+
+<%= link_to 'Edit', edit_enrollment_path(@enrollment) %> |
+<%= link_to 'Back', enrollments_path %>

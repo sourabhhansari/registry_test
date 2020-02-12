@@ -23,10 +23,11 @@
 
   <div class="field">
     <%= form.label :state %>
-    <%= form.number_field :state %>
+    <%= form.select :state, options_for_select(Registry::STATUS), prompt: 'Select State' %>
   </div>
 
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+

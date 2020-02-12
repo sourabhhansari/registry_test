@@ -1,0 +1,32 @@
+<%= form_with(model: enrollment, local: true) do |form| %>
+  <% if enrollment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(enrollment.errors.count, "error") %> prohibited this enrollment from being saved:</h2>
+
+      <ul>
+      <% enrollment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :registry_id %>
+    <%= form.select :registry_id, options_for_select(Registry.all.map{ |s| [s.name, s.id] }), prompt: 'Select registry' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :coordinator_id %>
+    <%= form.select :coordinator_id, options_for_select(Coordinator.all.map{ |s| [s.email, s.id] }), prompt: 'Select coordinator' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :participant_id %>
+    <%= form.select :participant_id, options_for_select(Participant.all.map{|s|[s.name, s.id] }), prompt: 'Select participant' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
