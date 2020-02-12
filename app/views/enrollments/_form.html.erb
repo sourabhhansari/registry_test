@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :registry_id %>
-    <%= form.select :registry_id, options_for_select(Registry.all.map{ |s| [s.name, s.id] }), prompt: 'Select registry' %>
+    <%= form.select :registry_id, options_for_select(Registry.where(state: 0).map{ |s| [s.name, s.id] }), prompt: 'Select registry' %>
   </div>
 
   <div class="field">
@@ -26,6 +26,10 @@
     <%= form.select :participant_id, options_for_select(Participant.all.map{|s|[s.name, s.id] }), prompt: 'Select participant' %>
   </div>
 
+<div class="field">
+    <%= form.label :remarks %>
+    <%= form.text_area :remarks %>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>

@@ -2,17 +2,22 @@
 
 <p>
   <strong>Registry:</strong>
-  <%= @enrollment.registry %>
+  <%= @enrollment.registry&.name %>
 </p>
 
 <p>
   <strong>Coordinator:</strong>
-  <%= @enrollment.coordinator %>
+  <%= @enrollment.coordinator&.email %>
 </p>
 
 <p>
   <strong>Participant:</strong>
-  <%= @enrollment.participant %>
+  <%= @enrollment.participant&.name %>
+</p>
+
+<p>
+  <strong>Remarks:</strong>
+  <%= @enrollment.remarks %>
 </p>
 
 <%= link_to 'Edit', edit_enrollment_path(@enrollment) %> |

@@ -1,28 +1,31 @@
-class CoordinatorsController < ApplicationController
-  before_action :set_coordinator, only: [:show, :edit, :update, :destroy]
+# frozen_string_literal: true
 
-  # GET /coordinators
-  # GET /coordinators.json
+class CoordinatorsController < ApplicationController
+  before_action :set_coordinator, only: %i[show edit update destroy export_csv]
+
   def index
     @coordinators = Coordinator.all
   end
 
-  # GET /coordinators/1
-  # GET /coordinators/1.json
   def show
+    @participants = @coordinator.participants
+    @count_by_birth_year = @coordinator.participants.group(:date_of_birth).count
+    @count_by_gender = @coordinator.participants.group(:gender).count
   end
 
-  # GET /coordinators/new
+  def export_csv
+    @participants = @coordinator.participants
+    respond_to do |format|
+      format.csv { send_data @participants.to_csv }
+    end
+  end
+
   def new
     @coordinator = Coordinator.new
   end
 
-  # GET /coordinators/1/edit
-  def edit
-  end
+  def edit; end
 
-  # POST /coordinators
-  # POST /coordinators.json
   def create
     @coordinator = Coordinator.new(coordinator_params)
 
@@ -37,8 +40,6 @@ class CoordinatorsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /coordinators/1
-  # PATCH/PUT /coordinators/1.json
   def update
     respond_to do |format|
       if @coordinator.update(coordinator_params)
@@ -51,8 +52,6 @@ class CoordinatorsController < ApplicationController
     end
   end
 
-  # DELETE /coordinators/1
-  # DELETE /coordinators/1.json
   def destroy
     @coordinator.destroy
     respond_to do |format|
@@ -62,13 +61,12 @@ class CoordinatorsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_coordinator
-      @coordinator = Coordinator.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def coordinator_params
-      params.require(:coordinator).permit(:email, :name, :phone_number)
-    end
+  def set_coordinator
+    @coordinator = Coordinator.find(params[:id])
+  end
+
+  def coordinator_params
+    params.require(:coordinator).permit(:email, :name, :phone_number)
+  end
 end

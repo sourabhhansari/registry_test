@@ -2,9 +2,9 @@
 
 # app/models/registry.rb
 class Registry < ApplicationRecord
-  has_many :enrollment
-  has_many :coordinators, through: :enrollment
-  has_many :participants, through: :enrollment
+  has_many :enrollments
+  has_many :coordinators, through: :enrollments
+  has_many :participants, through: :enrollments
 
   enum state: %i[open closed]
   STATUS = %w[open closed].freeze

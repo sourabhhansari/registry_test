@@ -17,3 +17,25 @@
 
 <%= link_to 'Edit', edit_coordinator_path(@coordinator) %> |
 <%= link_to 'Back', coordinators_path %>
+
+<h3>All participants</h3>
+<ul>
+  <% @participants.each do |participant| %>
+    <li><%= participant.name %></li>
+  <% end %>
+</ul>
+
+<h3>participant Count Aggrgate by birth year</h3>
+<% @count_by_birth_year.each do |key,value| -%>
+<%= key.year %>=<%= value %>
+<% end %>
+
+
+<h3>participant Count Aggrgate by gender</h3>
+<% @count_by_gender.each do |key,value| -%>
+<%= key %>=<%= value %>
+<% end %>
+
+
+<br>
+<%= link_to 'export all participant to csv', export_csv_coordinator_path(id: @coordinator.id, format: "csv") %>

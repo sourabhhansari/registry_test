@@ -15,9 +15,9 @@
   <tbody>
     <% @enrollments.each do |enrollment| %>
       <tr>
-        <td><%= enrollment.registry %></td>
-        <td><%= enrollment.coordinator %></td>
-        <td><%= enrollment.participant %></td>
+        <td><%= enrollment.registry&.name %></td>
+        <td><%= enrollment.coordinator&.email %></td>
+        <td><%= enrollment.participant&.name %></td>
         <td><%= link_to 'Show', enrollment %></td>
         <td><%= link_to 'Edit', edit_enrollment_path(enrollment) %></td>
         <td><%= link_to 'Destroy', enrollment, method: :delete, data: { confirm: 'Are you sure?' } %></td>

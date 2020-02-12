@@ -17,3 +17,11 @@
 
 <%= link_to 'Edit', edit_registry_path(@registry) %> |
 <%= link_to 'Back', registries_path %>
+
+
+<h3>Participants<h3>
+<ul>
+  <% @participants.each do |participant| %>
+    <li><%= participant.name %></li>
+  <% end %>
+<ul>
