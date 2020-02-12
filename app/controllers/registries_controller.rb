@@ -58,7 +58,6 @@ class RegistriesController < ApplicationController
     @registry = Registry.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def registry_params
     params.require(:registry).permit(:name, :location, :state)
   end
